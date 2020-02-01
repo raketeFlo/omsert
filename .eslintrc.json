@@ -30,6 +30,18 @@
             ".jsx"
           ]
         }
-      ]
+      ],
+      "import/no-unresolved": "off",
+      "import/extensions": "never"
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      }
     }
 }
