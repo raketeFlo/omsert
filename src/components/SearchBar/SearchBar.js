@@ -7,9 +7,9 @@ import { Autocomplete } from '@material-ui/lab';
 
 import './SearchBar.css';
 
-
+// TODO: change background color
 const useStyles = makeStyles({
-  search: {
+  root: {
     backgroundColor: '#ffff',
   },
 });
@@ -34,7 +34,7 @@ const SearchBar = ({ countryList, addSelected, empty }) => {
             <TextField
               {...params}
               onChange={(e) => empty(e.target.value)}
-              className={classes.search}
+              className={classes.root}
               label="Type Country Name..."
               margin="normal"
               variant="filled"
