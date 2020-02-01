@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import uuidv4 from 'uuid/v4';
 import Box from '@material-ui/core/Box';
-
-const uuidv4 = require('uuid/v4');
 
 
 const CountryDetails = ({ details }) => {

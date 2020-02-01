@@ -1,15 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './CountryList.css';
+import Lazyload from 'react-lazyload';
+import uuidv4 from 'uuid/v4';
+
 import CountryListItem from '../../components/CountryListItem/CountryListItem';
 
 const CountryList = ({ countryList }) => {
   const JSXList = countryList.map((country) => {
     return (
-      <CountryListItem
-        key={country.name}
-        listItem={country}
-      />
+      <Lazyload
+        key={uuidv4()}
+        height={80}
+        offset={[-100, 100]}
+        width="100%"
+      >
+        <CountryListItem
+          key={uuidv4()}
+          listItem={country}
+        />
+      </Lazyload>
     );
   });
   return (
