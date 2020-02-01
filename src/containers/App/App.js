@@ -8,6 +8,18 @@ require('dotenv').config();
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState([]);
+
+  const onSelect = (userInput) => {
+    const selected = countries.find((country) => country.name === userInput);
+    if (selected) setSelectedCountry([selected]);
+    else setSelectedCountry([]);
+  };
+
+  const removeSelection = (currentInput) => {
+    if (!currentInput) setSelectedCountry([]);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCountries();
@@ -17,8 +29,12 @@ function App() {
   }, []);
   return (
     <div className="App-Container">
-      <SearchBar />
-      <CountryList countryList={countries} />
+      <SearchBar
+        countryList={countries}
+        addSelected={onSelect}
+        empty={removeSelection}
+      />
+      <CountryList countryList={selectedCountry.length ? selectedCountry : countries} />
     </div>
   );
 }
