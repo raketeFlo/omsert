@@ -31,6 +31,10 @@ function App() {
     setCountries(filtered);
   };
 
+  const changeOrder = () => {
+    setCountries([...countries].reverse());
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCountries();
@@ -47,6 +51,7 @@ function App() {
       />
       <FilterBar
         handleFilter={filterCountries}
+        reverse={changeOrder}
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
