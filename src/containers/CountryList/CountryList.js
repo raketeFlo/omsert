@@ -1,13 +1,44 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './CountryList.css';
 import CountryListItem from '../../components/CountryListItem/CountryListItem';
 
-const CountryList = () => {
+const CountryList = ({ countryList }) => {
+  const JSXList = countryList.map((country) => {
+    return (
+      <CountryListItem
+        key={country.name}
+        listItem={country}
+      />
+    );
+  });
   return (
     <div className="list-container">
-      <CountryListItem />
+      {JSXList}
     </div>
   );
 };
+
+CountryList.propTypes = {
+  countryList: PropTypes.arrayOf(PropTypes.shape({
+    currencies: PropTypes.arrayOf(PropTypes.shape({
+      code: PropTypes.string,
+      name: PropTypes.string,
+      symbol: PropTypes.string,
+    })),
+    flag: PropTypes.string,
+    name: PropTypes.string,
+    capital: PropTypes.string,
+    region: PropTypes.string,
+    population: PropTypes.number,
+    latlng: PropTypes.arrayOf(PropTypes.number),
+    timezones: PropTypes.arrayOf(PropTypes.string),
+  })),
+};
+
+CountryList.defaultProps = {
+  countryList: [],
+};
+
 
 export default CountryList;
