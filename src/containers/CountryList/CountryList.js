@@ -11,9 +11,11 @@ const CountryList = ({ countryList }) => {
     return (
       <Lazyload
         key={uuidv4()}
-        height={80}
+        height={50}
         offset={[-100, 100]}
         width="100%"
+        once
+        overflow
       >
         <CountryListItem
           key={uuidv4()}

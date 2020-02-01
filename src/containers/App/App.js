@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CountryList from '../CountryList/CountryList';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import { getCountries } from '../../services/ApiClient';
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
   }, []);
   return (
     <div className="App-Container">
+      <SearchBar />
       <CountryList countryList={countries} />
     </div>
   );
