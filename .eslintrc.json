@@ -31,8 +31,7 @@
           ]
         }
       ],
-      "import/no-unresolved": "off",
-      "import/extensions": "never"
+      "import/no-unresolved": "off"
     },
     "settings": {
       "import/resolver": {
