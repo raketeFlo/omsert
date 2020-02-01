@@ -7,11 +7,12 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CountryDetails from '../CountryDetails/CountryDetails';
 
+import './CountryListItem.css';
+
 const useStyles = makeStyles({
-  titel: {
-    fontSize: 15,
-    fontFamily: 'Asap',
-    color: '#651FFF',
+  container: {
+    margin: '0 auto',
+    width: '100%',
   },
 });
 
@@ -26,10 +27,19 @@ const CountryListItem = ({ listItem }) => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Box className={classes.titel}>
-          <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
-          {listItem.name}
-          {listItem.population}
+        <Box className={classes.container}>
+          <div>
+            <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
+
+          </div>
+          <div className="info-name">
+            {listItem.name}
+          </div>
+          <div>
+            <p>Population: </p>
+            {listItem.population}
+            {' People'}
+          </div>
         </Box>
       </ExpansionPanelSummary>
       <CountryDetails details={listItem} />
