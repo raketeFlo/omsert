@@ -6,7 +6,7 @@ import uuidv4 from 'uuid/v4';
 
 import CountryListItem from '../../components/CountryListItem/CountryListItem';
 
-const CountryList = ({ countryList }) => {
+const CountryList = ({ countryList, addSelected }) => {
   const JSXList = countryList.map((country) => {
     return (
       <Lazyload
@@ -20,6 +20,7 @@ const CountryList = ({ countryList }) => {
         <CountryListItem
           key={uuidv4()}
           listItem={country}
+          selectCountry={addSelected}
         />
       </Lazyload>
     );
@@ -32,6 +33,7 @@ const CountryList = ({ countryList }) => {
 };
 
 CountryList.propTypes = {
+  addSelected: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

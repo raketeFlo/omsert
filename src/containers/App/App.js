@@ -13,6 +13,7 @@ const App = () => {
   const [selectedCountry, setSelectedCountry] = useState([]);
 
   const onSelect = (userInput) => {
+    console.log(userInput);
     const selected = countries.find((country) => country.name === userInput);
     if (selected) setSelectedCountry([selected]);
     else setSelectedCountry([]);
@@ -57,8 +58,11 @@ const App = () => {
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
+        addSelected={onSelect}
       />
-      <GlobalMap />
+      <GlobalMap
+        country={selectedCountry}
+      />
     </div>
   );
 };

@@ -16,11 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-const CountryListItem = ({ listItem }) => {
+const CountryListItem = ({ listItem, selectCountry }) => {
   const classes = useStyles();
   return (
     <ExpansionPanel
-      onChange={() => console.log('clicked')}
+      onChange={(e) => selectCountry(e.target)}
     >
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
@@ -48,6 +48,7 @@ const CountryListItem = ({ listItem }) => {
 };
 
 CountryListItem.propTypes = {
+  selectCountry: PropTypes.func.isRequired,
   listItem: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,
