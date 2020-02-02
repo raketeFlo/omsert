@@ -1,0 +1,16 @@
+.button {
+    background-color: transparent;
+    border: none;
+    color: var(--main-color);
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.button:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
