@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import CountryList from '../CountryList/CountryList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import FilterBar from '../../components/FilterBar/FilterBar';
+import GlobalMap from '../GlobalMap/GlobalMap';
 import { getCountries } from '../../services/ApiClient';
 import './App.css';
 
 require('dotenv').config();
 
-function App() {
+const App = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
 
@@ -42,6 +43,7 @@ function App() {
     };
     fetchData();
   }, []);
+
   return (
     <div className="App-Container">
       <SearchBar
@@ -56,8 +58,9 @@ function App() {
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
       />
+      <GlobalMap />
     </div>
   );
-}
+};
 
 export default App;
