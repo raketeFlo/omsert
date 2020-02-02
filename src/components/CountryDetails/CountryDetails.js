@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import uuidv4 from 'uuid/v4';
+import { createEmail } from '../../utils/emailTemplate';
+import { EmailShareButton, FacebookIcon, FacebookShareButton, EmailIcon } from 'react-share';
 import Modal from '@material-ui/core/Modal';
 import './CountryDetails.css';
 
@@ -42,10 +44,26 @@ function getModalStyle() {
 const CountryDetails = ({
   details, handleOpen, flag,
 }) => {
+  const {
+    name, population, region, capital,
+  } = details;
   const classes = useStyles();
+  const currenciesEmail = [];
+  const timeZonesEmail = [];
   const [modalStyle] = useState(getModalStyle);
-  const currencies = details.currencies.map((currency) => <div key={uuidv4()}>{currency.code}</div>);
-  const timezones = details.timezones.map((timezone) => <div key={uuidv4()}>{timezone}</div>);
+  const currencies = details.currencies.map((currency) => {
+    currenciesEmail.push(currency.code);
+    return <div key={uuidv4()}>{currency.code}</div>;
+  });
+  const timezones = details.timezones.map((timezone) => {
+    timeZonesEmail.push(timezone);
+    return <div key={uuidv4()}>{timezone}</div>;
+  });
+
+
+  const emailTempl = createEmail(
+    name, population, region, capital, currenciesEmail, timeZonesEmail,
+  );
 
   return (
     <div>
@@ -72,6 +90,14 @@ const CountryDetails = ({
             <p>Currencies: </p>
             {currencies}
           </div>
+          <EmailShareButton
+            subject={`Information about ${details.name}`}
+            separator=" "
+            body={emailTempl}
+            url="http://localhost:3000"
+          >
+            <EmailIcon />
+          </EmailShareButton>
         </div>
       </Modal>
     </div>
