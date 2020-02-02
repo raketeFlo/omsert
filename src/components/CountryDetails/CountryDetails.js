@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import uuidv4 from 'uuid/v4';
-import Box from '@material-ui/core/Box';
+import Modal from '@material-ui/core/Modal';
 import './CountryDetails.css';
 
 const useStyles = makeStyles({
+  paper: {
+    position: 'absolute',
+    width: '90%',
+    backgroundColor: 'white',
+    border: '2px solid #000',
+    padding: 20,
+  },
   titel: {
     fontSize: 15,
     fontFamily: 'Asap',
@@ -21,17 +27,35 @@ const useStyles = makeStyles({
   },
 });
 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
 
-const CountryDetails = ({ details }) => {
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+
+const CountryDetails = ({
+  details, handleOpen, flag,
+}) => {
   const classes = useStyles();
+  const [modalStyle] = useState(getModalStyle);
   const currencies = details.currencies.map((currency) => <div key={uuidv4()}>{currency.code}</div>);
   const timezones = details.timezones.map((timezone) => <div key={uuidv4()}>{timezone}</div>);
+
   return (
-    <>
-      <ExpansionPanelDetails>
-        <Box
-          className={classes.container}
-        >
+    <div>
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={flag}
+        onClose={handleOpen}
+      >
+        <div style={modalStyle} className={classes.paper}>
           <div className="info">
             <p>Capital: </p>
             {details.capital}
@@ -48,13 +72,15 @@ const CountryDetails = ({ details }) => {
             <p>Currencies: </p>
             {currencies}
           </div>
-        </Box>
-      </ExpansionPanelDetails>
-    </>
+        </div>
+      </Modal>
+    </div>
   );
 };
 
 CountryDetails.propTypes = {
+  flag: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
   details: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

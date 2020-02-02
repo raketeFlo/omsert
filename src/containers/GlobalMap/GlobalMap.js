@@ -4,13 +4,15 @@ import GoogleMapReact from 'google-map-react';
 import Marker from '../../components/Marker/Marker';
 
 const Map = ({ country }) => {
-  const [position, setPosition] = useState({
+  const defaultPosition = {
     center: {
       lat: 48.36,
       lng: 10.89,
     },
     zoom: 11,
-  });
+  };
+
+  const [position, setPosition] = useState(defaultPosition);
 
   const setCountry = () => {
     if (country.length) {
@@ -23,6 +25,8 @@ const Map = ({ country }) => {
         zoom: 5,
       };
       setPosition(newPosition);
+    } else {
+      setPosition(defaultPosition);
     }
   };
 
@@ -35,8 +39,8 @@ const Map = ({ country }) => {
     <div style={{ height: '50vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
-        defaultCenter={position.center}
-        defaultZoom={position.zoom}
+        defaultCenter={defaultPosition.center}
+        defaultZoom={defaultPosition.zoom}
         center={position.center}
         zoom={position.zoom}
       >

@@ -11,12 +11,21 @@ require('dotenv').config();
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
+  const [modalCountry, setModalCountry] = useState([]);
 
   const onSelect = (userInput) => {
-    console.log(userInput);
     const selected = countries.find((country) => country.name === userInput);
-    if (selected) setSelectedCountry([selected]);
-    else setSelectedCountry([]);
+    if (selected) {
+      setSelectedCountry([selected]);
+      setModalCountry([selected]);
+    } else {
+      setSelectedCountry([]);
+    }
+  };
+
+  const changeLocation = (userInput) => {
+    const selected = countries.find((country) => country.name === userInput);
+    setModalCountry([selected]);
   };
 
   const removeSelection = (currentInput) => {
@@ -58,10 +67,11 @@ const App = () => {
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
-        addSelected={onSelect}
+        addSelected={changeLocation}
+        selectedCountry={modalCountry}
       />
       <GlobalMap
-        country={selectedCountry}
+        country={modalCountry}
       />
     </div>
   );

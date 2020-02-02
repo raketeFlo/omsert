@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import Box from '@material-ui/core/Box';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CountryDetails from '../CountryDetails/CountryDetails';
 
 import './CountryListItem.css';
 
@@ -16,38 +12,39 @@ const useStyles = makeStyles({
   },
 });
 
-const CountryListItem = ({ listItem, selectCountry }) => {
+const CountryListItem = ({ listItem, selectCountry, handleOpen }) => {
   const classes = useStyles();
   return (
-    <ExpansionPanel
-      onChange={(e) => selectCountry(e.target)}
-    >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Box className={classes.container}>
-          <div>
-            <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
+    <>
+      <Box className={classes.container}>
+        <div>
+          <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
 
-          </div>
-          <div className="info-name">
-            {listItem.name}
-          </div>
-          <div>
-            <p>Population: </p>
-            {listItem.population}
-            {' People'}
-          </div>
-        </Box>
-      </ExpansionPanelSummary>
-      <CountryDetails details={listItem} />
-    </ExpansionPanel>
+        </div>
+        <div className="info-name">
+          {listItem.name}
+        </div>
+        <div>
+          <p>Population: </p>
+          {listItem.population}
+          {' People'}
+        </div>
+      </Box>
+      <button
+        type="button"
+        onClick={() => {
+          handleOpen();
+          selectCountry(listItem.name);
+        }}
+      >
+        Details
+      </button>
+    </>
   );
 };
 
 CountryListItem.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
   selectCountry: PropTypes.func.isRequired,
   listItem: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
