@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import uuidv4 from 'uuid/v4';
-import { createEmail } from '../../utils/emailTemplate';
-import { EmailShareButton, FacebookIcon, FacebookShareButton, EmailIcon } from 'react-share';
+import { EmailShareButton, EmailIcon } from 'react-share';
 import Modal from '@material-ui/core/Modal';
+import { createEmail } from '../../utils/emailTemplate';
 import './CountryDetails.css';
 
 const useStyles = makeStyles({
