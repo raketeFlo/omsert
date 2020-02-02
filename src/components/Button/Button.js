@@ -8,7 +8,7 @@ const Button = (props) => {
     <button
       type="button"
       onClick={clicked}
-      className={`button ${btnType}`}
+      className={btnType}
     >
       {children}
     </button>
@@ -19,7 +19,11 @@ const Button = (props) => {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   clicked: PropTypes.func.isRequired,
-  btnType: PropTypes.string.isRequired,
+  btnType: PropTypes.string,
+};
+
+Button.defaultProps = {
+  btnType: 'button',
 };
 
 

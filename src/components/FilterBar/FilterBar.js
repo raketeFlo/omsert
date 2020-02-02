@@ -10,8 +10,9 @@ const FilterBar = ({ handleFilter, reverse }) => {
     <div className="filter-container">
       <Button
         clicked={handleFilter}
+        btnTyp="filter"
       >
-        By Name
+        Name
       </Button>
       <Button
         clicked={reverse}
@@ -20,8 +21,9 @@ const FilterBar = ({ handleFilter, reverse }) => {
       </Button>
       <Button
         clicked={handleFilter}
+        btnTyp="filter"
       >
-        By Population
+        Population
       </Button>
       <Button
         clicked={reverse}

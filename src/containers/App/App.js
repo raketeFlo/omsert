@@ -22,7 +22,7 @@ function App() {
   };
 
   const filterCountries = (event) => {
-    const filter = event.target.textContent.split(' ')[1].toLowerCase();
+    const filter = event.target.textContent.toLowerCase();
     const filtered = [...countries].sort((a, b) => {
       if (a[filter] < b[filter]) return -1;
       if (a[filter] > b[filter]) return 1;
