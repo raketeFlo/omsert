@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import uuidv4 from 'uuid/v4';
-import { EmailShareButton, EmailIcon } from 'react-share';
+import { EmailShareButton, EmailIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Modal from '@material-ui/core/Modal';
 import { createEmail } from '../../utils/emailTemplate';
 import './CountryDetails.css';
@@ -98,6 +98,12 @@ const CountryDetails = ({
           >
             <EmailIcon />
           </EmailShareButton>
+          <FacebookShareButton
+            quote={emailTempl}
+            url="http://www.localhost:3000"
+          >
+            <FacebookIcon />
+          </FacebookShareButton>
         </div>
       </Modal>
     </div>
