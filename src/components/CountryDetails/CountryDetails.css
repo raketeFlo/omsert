@@ -7,9 +7,6 @@
   padding: 10px;
 }
 
-.info p {
-  font-weight: 900;
-  padding-left: 20px;
-  align-self: center;
-  text-transform: uppercase;
+.info div {
+  padding: 10px;
 }

@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import uuidv4 from 'uuid/v4';
-import {
-  EmailShareButton, EmailIcon,
-  FacebookShareButton, FacebookIcon,
-  TwitterShareButton, TwitterIcon,
-  WhatsappShareButton, WhatsappIcon,
-} from 'react-share';
+import Modal from '@material-ui/core/Modal';
 import LocationCityRoundedIcon from '@material-ui/icons/LocationCityRounded';
 import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import LocalAtmRoundedIcon from '@material-ui/icons/LocalAtmRounded';
-import Modal from '@material-ui/core/Modal';
-import { createEmail } from '../../utils/emailTemplate';
+import SocialShare from '../SocialShare/SocialShare';
+
 import './CountryDetails.css';
 
 const useStyles = makeStyles({
@@ -50,31 +45,23 @@ function getModalStyle() {
 }
 
 
-const CountryDetails = ({
-  details, handleOpen, flag,
-}) => {
-  const {
-    name, population, region, capital,
-  } = details;
+const CountryDetails = ({ details, handleOpen, flag }) => {
+  const [modalStyle] = useState(getModalStyle);
   const classes = useStyles();
+  const {
+    timezones, currencies, capital, region,
+  } = details;
+
   const currenciesEmail = [];
   const timeZonesEmail = [];
-  const shareURL = 'http://www.localhost:3000';
-  const shareTitle = `Information about ${details.name}:`;
-  const [modalStyle] = useState(getModalStyle);
-  const currencies = details.currencies.map((currency) => {
+  const allCurrencies = currencies.map((currency) => {
     currenciesEmail.push(currency.code);
     return <div key={uuidv4()}>{currency.code}</div>;
   });
-  const timezones = details.timezones.map((timezone) => {
+  const allTimezones = timezones.map((timezone) => {
     timeZonesEmail.push(timezone);
     return <div key={uuidv4()}>{timezone}</div>;
   });
-
-
-  const emailTempl = createEmail(
-    name, population, region, capital, currenciesEmail, timeZonesEmail,
-  );
 
   return (
     <div>
@@ -87,56 +74,25 @@ const CountryDetails = ({
         <div style={modalStyle} className={classes.paper}>
           <div className="info">
             <LocationCityRoundedIcon />
-            <p>
-              {!details.capital ? 'N/A' : details.capital}
-            </p>
+            <div>{!capital ? 'N/A' : capital}</div>
           </div>
           <div className="info">
             <ExploreRoundedIcon />
-            <p>
-              {!details.region ? 'N/A' : details.region}
-            </p>
+            <div>{!region ? 'N/A' : region}</div>
           </div>
           <div className="info">
             <ScheduleRoundedIcon />
-            <p>
-              {timezones}
-            </p>
+            {allTimezones}
           </div>
           <div className="info">
             <LocalAtmRoundedIcon />
-            <p>
-              {currencies}
-            </p>
+            {allCurrencies}
           </div>
-          <EmailShareButton
-            subject={shareTitle}
-            body={emailTempl}
-            url={shareURL}
-          >
-            <EmailIcon />
-          </EmailShareButton>
-          <FacebookShareButton
-            quote={emailTempl}
-            url={shareURL}
-            separator=" "
-          >
-            <FacebookIcon />
-          </FacebookShareButton>
-          <TwitterShareButton
-            title={emailTempl}
-            hashtags={['hello', 'world', `${details.name}`]}
-            url={shareURL}
-          >
-            <TwitterIcon />
-          </TwitterShareButton>
-          <WhatsappShareButton
-            url={shareURL}
-            title={emailTempl}
-            separator=" "
-          >
-            <WhatsappIcon />
-          </WhatsappShareButton>
+          <SocialShare
+            details={details}
+            currencies={currenciesEmail}
+            timezones={timeZonesEmail}
+          />
         </div>
       </Modal>
     </div>
