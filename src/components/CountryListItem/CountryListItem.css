@@ -1,3 +1,27 @@
-.info-name {
-  color: var(--main-color);
+.info-flag img {
+  height: 20px;
+  width: 25px;
+}
+
+.info-pop {
+  color: 	var(--second-color);
+}
+
+.info-pop,
+.info-flag,
+.info-name,
+.info-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.item-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 0.5px solid var(--second-color);
 }

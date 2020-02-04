@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,31 +14,33 @@ const useStyles = makeStyles({
 });
 
 
-const SearchBar = ({ countryList, addSelected, empty }) => {
+const SearchBar = ({ countryList, addSelected, resetList }) => {
   const classes = useStyles();
   return (
     <div className="search-container">
       <div className="icon-container">
-        <img src="/icons/logo-white.svg" alt="logo" height="50px" width="50px" />
+        <img src="/icons/logo-black.svg" alt="logo" height="50px" width="50px" />
       </div>
       <div className="input-container">
         <Autocomplete
-          freeSolo
+          id="size-small-standard"
+          size="small"
+          disableOpenOnFocus
           autoHighlight
-          id="search-bar"
-          disableClearable
-          onChange={(e) => addSelected(e.target.textContent)}
+          clearOnEscape
+          onChange={(e) => {
+            addSelected(e.target.textContent);
+          }}
           options={countryList.map((country) => country.name)}
           renderInput={(params) => (
             <TextField
               {...params}
-              onChange={(e) => empty(e.target.value)}
+              onChange={(e) => resetList(e.target.value)}
               className={classes.root}
-              label="Type Country Name..."
+              label="Type country name..."
               margin="normal"
-              variant="filled"
+              variant="standard"
               fullWidth
-              type="search"
             />
           )}
         />
@@ -50,7 +51,7 @@ const SearchBar = ({ countryList, addSelected, empty }) => {
 
 SearchBar.propTypes = {
   addSelected: PropTypes.func.isRequired,
-  empty: PropTypes.func.isRequired,
+  resetList: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

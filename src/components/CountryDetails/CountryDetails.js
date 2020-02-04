@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import uuidv4 from 'uuid/v4';
-import Box from '@material-ui/core/Box';
+import {
+  EmailShareButton, EmailIcon,
+  FacebookShareButton, FacebookIcon,
+  TwitterShareButton, TwitterIcon,
+  WhatsappShareButton, WhatsappIcon,
+} from 'react-share';
+import Modal from '@material-ui/core/Modal';
+import { createEmail } from '../../utils/emailTemplate';
 import './CountryDetails.css';
 
 const useStyles = makeStyles({
+  paper: {
+    position: 'absolute',
+    width: '90%',
+    backgroundColor: 'white',
+    border: '2px solid #000',
+    padding: 20,
+  },
   titel: {
     fontSize: 15,
     fontFamily: 'Asap',
@@ -21,24 +34,60 @@ const useStyles = makeStyles({
   },
 });
 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
 
-const CountryDetails = ({ details }) => {
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+
+const CountryDetails = ({
+  details, handleOpen, flag,
+}) => {
+  const {
+    name, population, region, capital,
+  } = details;
   const classes = useStyles();
-  const currencies = details.currencies.map((currency) => <div key={uuidv4()}>{currency.code}</div>);
-  const timezones = details.timezones.map((timezone) => <div key={uuidv4()}>{timezone}</div>);
+  const currenciesEmail = [];
+  const timeZonesEmail = [];
+  const shareURL = 'http://www.localhost:3000';
+  const shareTitle = `Information about ${details.name}:`;
+  const [modalStyle] = useState(getModalStyle);
+  const currencies = details.currencies.map((currency) => {
+    currenciesEmail.push(currency.code);
+    return <div key={uuidv4()}>{currency.code}</div>;
+  });
+  const timezones = details.timezones.map((timezone) => {
+    timeZonesEmail.push(timezone);
+    return <div key={uuidv4()}>{timezone}</div>;
+  });
+
+
+  const emailTempl = createEmail(
+    name, population, region, capital, currenciesEmail, timeZonesEmail,
+  );
+
   return (
-    <>
-      <ExpansionPanelDetails>
-        <Box
-          className={classes.container}
-        >
+    <div>
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={flag}
+        onClose={handleOpen}
+      >
+        <div style={modalStyle} className={classes.paper}>
           <div className="info">
             <p>Capital: </p>
-            {details.capital}
+            {!details.capital ? 'N/A' : details.capital}
           </div>
           <div className="info">
             <p>Continent: </p>
-            {details.region}
+            {!details.region ? 'N/A' : details.region}
           </div>
           <div className="info">
             <p>Timezones: </p>
@@ -48,13 +97,43 @@ const CountryDetails = ({ details }) => {
             <p>Currencies: </p>
             {currencies}
           </div>
-        </Box>
-      </ExpansionPanelDetails>
-    </>
+          <EmailShareButton
+            subject={shareTitle}
+            body={emailTempl}
+            url={shareURL}
+          >
+            <EmailIcon />
+          </EmailShareButton>
+          <FacebookShareButton
+            quote={emailTempl}
+            url={shareURL}
+            separator=" "
+          >
+            <FacebookIcon />
+          </FacebookShareButton>
+          <TwitterShareButton
+            title={emailTempl}
+            hashtags={['hello', 'world', `${details.name}`]}
+            url={shareURL}
+          >
+            <TwitterIcon />
+          </TwitterShareButton>
+          <WhatsappShareButton
+            url={shareURL}
+            title={emailTempl}
+            separator=" "
+          >
+            <WhatsappIcon />
+          </WhatsappShareButton>
+        </div>
+      </Modal>
+    </div>
   );
 };
 
 CountryDetails.propTypes = {
+  flag: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
   details: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

@@ -1,53 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import Box from '@material-ui/core/Box';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CountryDetails from '../CountryDetails/CountryDetails';
+import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import Button from '../Button/Button';
 
 import './CountryListItem.css';
 
-const useStyles = makeStyles({
-  container: {
-    margin: '0 auto',
-    width: '100%',
-  },
-});
 
-const CountryListItem = ({ listItem }) => {
-  const classes = useStyles();
+const CountryListItem = ({ listItem, selectCountry, handleOpen }) => {
   return (
-    <ExpansionPanel
-      onChange={() => console.log('clicked')}
-    >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Box className={classes.container}>
-          <div>
-            <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
+    <div className="item-container">
+      <div className="info-flag">
+        <img src={listItem.flag} alt="country-flag" />
 
-          </div>
-          <div className="info-name">
-            {listItem.name}
-          </div>
-          <div>
-            <p>Population: </p>
-            {listItem.population}
-            {' People'}
-          </div>
-        </Box>
-      </ExpansionPanelSummary>
-      <CountryDetails details={listItem} />
-    </ExpansionPanel>
+      </div>
+      <div className="info-name">
+        {listItem.name}
+      </div>
+      <div className="info-pop">
+        {listItem.population}
+      </div>
+      <div className="info-button">
+        <Button
+          type="button"
+          clicked={() => {
+            handleOpen();
+            selectCountry(listItem.name);
+          }}
+        >
+          <KeyboardArrowRightRoundedIcon />
+        </Button>
+      </div>
+    </div>
   );
 };
 
 CountryListItem.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
+  selectCountry: PropTypes.func.isRequired,
   listItem: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

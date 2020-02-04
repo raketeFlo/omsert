@@ -1,35 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ImportExportSharpIcon from '@material-ui/icons/ImportExportSharp';
-import Button from '../Button/Button';
+import ToggleOffTwoToneIcon from '@material-ui/icons/ToggleOffTwoTone';
+import ToggleOnTwoToneIcon from '@material-ui/icons/ToggleOnTwoTone';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 
 import './FilterBar.css';
 
-const FilterBar = ({ handleFilter, reverse }) => {
+const FilterBar = ({ handleFilter }) => {
+  const [selected, setSelected] = useState(false);
   return (
     <div className="filter-container">
-      <Button
-        clicked={handleFilter}
-        btnTyp="filter"
+      <div>Name</div>
+      <ToggleButton
+        disableRipple
+        disableFocusRipple
+        value="check"
+        className="MuiToggleButton-root"
+        selected={selected}
+        onChange={() => {
+          handleFilter(selected);
+          setSelected(!selected);
+        }}
       >
-        Name
-      </Button>
-      <Button
-        clicked={reverse}
-      >
-        <ImportExportSharpIcon />
-      </Button>
-      <Button
-        clicked={handleFilter}
-        btnTyp="filter"
-      >
-        Population
-      </Button>
-      <Button
-        clicked={reverse}
-      >
-        <ImportExportSharpIcon />
-      </Button>
+        {selected
+          ? <ToggleOnTwoToneIcon />
+          : <ToggleOffTwoToneIcon />}
+      </ToggleButton>
+      <div>Population</div>
     </div>
   );
 };
@@ -37,7 +34,6 @@ const FilterBar = ({ handleFilter, reverse }) => {
 
 FilterBar.propTypes = {
   handleFilter: PropTypes.func.isRequired,
-  reverse: PropTypes.func.isRequired,
 };
 
 

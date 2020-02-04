@@ -1,7 +1,18 @@
 .filter-container {
   width: 100%;
   display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
+}
+
+.MuiToggleButton-root {
+  color: var(--main-color) !important;
+  background-color: none !important;
+  border: none !important;
+}
+
+.MuiToggleButton-root, .Mui-selected{
+  background-color: none !important;
 }
