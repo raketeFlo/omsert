@@ -17,7 +17,6 @@ const CountryListItem = ({ listItem, selectCountry, handleOpen }) => {
         {listItem.name}
       </div>
       <div className="info-pop">
-        <p>Population: </p>
         {listItem.population}
       </div>
       <div className="info-button">
