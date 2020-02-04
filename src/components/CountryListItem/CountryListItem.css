@@ -1,10 +1,6 @@
-.info-name {
-  color: var(--main-color);
-}
-
 .info-flag img {
   height: 20px;
-  width: 20px;
+  width: 25px;
 }
 
 .info-pop {

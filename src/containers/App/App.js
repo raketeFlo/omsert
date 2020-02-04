@@ -32,18 +32,14 @@ const App = () => {
     if (!currentInput) setSelectedCountry([]);
   };
 
-  const filterCountries = (event) => {
-    const filter = event.target.textContent.toLowerCase();
+  const filterCountries = (check) => {
+    const filter = check ? 'name' : 'population';
     const filtered = [...countries].sort((a, b) => {
       if (a[filter] < b[filter]) return -1;
       if (a[filter] > b[filter]) return 1;
       return 0;
     });
     setCountries(filtered);
-  };
-
-  const changeOrder = () => {
-    setCountries([...countries].reverse());
   };
 
   useEffect(() => {
@@ -63,7 +59,6 @@ const App = () => {
       />
       <FilterBar
         handleFilter={filterCountries}
-        reverse={changeOrder}
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}

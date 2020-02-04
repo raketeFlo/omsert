@@ -18,28 +18,27 @@ const Map = ({ country }) => {
   const [position, setPosition] = useState(defaultPosition);
 
 
-  const setCountry = async () => {
-    if (country.length) {
-      const response = await Geocode.fromAddress(country[0].name);
-      const { northeast, southwest } = response.results[0].geometry.bounds;
-      const bounds = {
-        ne: northeast,
-        sw: southwest,
-      };
-      const width = document.getElementById('map').offsetWidth;
-      const height = document.getElementById('map').offsetHeight;
-      const { center, zoom } = fitBounds(bounds, { width, height });
-      const newPosition = {
-        center,
-        zoom,
-      };
-      setPosition(newPosition);
-    } else {
-      setPosition(defaultPosition);
-    }
-  };
-
   useEffect(() => {
+    const setCountry = async () => {
+      if (country.length) {
+        const response = await Geocode.fromAddress(country[0].name);
+        const { northeast, southwest } = response.results[0].geometry.bounds;
+        const bounds = {
+          ne: northeast,
+          sw: southwest,
+        };
+        const width = document.getElementById('map').offsetWidth;
+        const height = document.getElementById('map').offsetHeight;
+        const { center, zoom } = fitBounds(bounds, { width, height });
+        const newPosition = {
+          center,
+          zoom,
+        };
+        setPosition(newPosition);
+      } else {
+        setPosition(defaultPosition);
+      }
+    };
     setCountry();
   }, [country]);
 

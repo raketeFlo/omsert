@@ -6,7 +6,7 @@ import {
   EmailShareButton, EmailIcon,
   FacebookShareButton, FacebookIcon,
   TwitterShareButton, TwitterIcon,
-  WhatsappShareButton, WhatsappIcon
+  WhatsappShareButton, WhatsappIcon,
 } from 'react-share';
 import Modal from '@material-ui/core/Modal';
 import { createEmail } from '../../utils/emailTemplate';
@@ -72,7 +72,6 @@ const CountryDetails = ({
     name, population, region, capital, currenciesEmail, timeZonesEmail,
   );
 
-  console.log(details.region);
   return (
     <div>
       <Modal

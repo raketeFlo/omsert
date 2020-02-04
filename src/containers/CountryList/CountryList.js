@@ -15,7 +15,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
     return (
       <Lazyload
         key={uuidv4()}
-        height={50}
+        height={10}
         offset={[-100, 100]}
         width="100%"
         once
@@ -30,6 +30,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
       </Lazyload>
     );
   });
+
   if (!flag) {
     return (
       <div className="list-container">
