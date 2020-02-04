@@ -1,45 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import Button from '../Button/Button';
 
 import './CountryListItem.css';
 
-const useStyles = makeStyles({
-  container: {
-    margin: '0 auto',
-    width: '100%',
-  },
-});
 
 const CountryListItem = ({ listItem, selectCountry, handleOpen }) => {
-  const classes = useStyles();
   return (
-    <>
-      <Box className={classes.container}>
-        <div>
-          <img src={listItem.flag} alt="country-flag" height="20px" width="20px" />
+    <div className="item-container">
+      <div className="info-flag">
+        <img src={listItem.flag} alt="country-flag" />
 
-        </div>
-        <div className="info-name">
-          {listItem.name}
-        </div>
-        <div>
-          <p>Population: </p>
-          {listItem.population}
-          {' People'}
-        </div>
-      </Box>
-      <button
-        type="button"
-        onClick={() => {
-          handleOpen();
-          selectCountry(listItem.name);
-        }}
-      >
-        Details
-      </button>
-    </>
+      </div>
+      <div className="info-name">
+        {listItem.name}
+      </div>
+      <div className="info-pop">
+        <p>Population: </p>
+        {listItem.population}
+      </div>
+      <div className="info-button">
+        <Button
+          type="button"
+          clicked={() => {
+            handleOpen();
+            selectCountry(listItem.name);
+          }}
+        >
+          <KeyboardArrowRightRoundedIcon />
+        </Button>
+      </div>
+    </div>
   );
 };
 

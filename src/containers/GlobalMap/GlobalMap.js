@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Geocode from 'react-geocode';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
 import Marker from '../../components/Marker/Marker';
@@ -14,9 +15,10 @@ const Map = ({ country }) => {
 
   const [position, setPosition] = useState(defaultPosition);
 
-  const setCountry = () => {
+  const setCountry = async () => {
     if (country.length) {
-      const [lat, lng] = [country[0].latlng[0], country[0].latlng[1]];
+      const response = await Geocode.fromAddress(country[0].name);
+      const { lat, lng } = response.results[0].geometry.location;
       const newPosition = {
         center: {
           lat,
@@ -33,6 +35,8 @@ const Map = ({ country }) => {
   useEffect(() => {
     setCountry();
   }, [country]);
+
+  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
 
   return (
     // Important! Always set the container height explicitly
