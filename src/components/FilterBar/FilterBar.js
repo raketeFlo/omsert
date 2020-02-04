@@ -25,8 +25,8 @@ const FilterBar = ({ handleFilter }) => {
           }}
         >
           {selected
-            ? <ToggleOnTwoToneIcon />
-            : <ToggleOffTwoToneIcon />}
+            ? <ToggleOnTwoToneIcon fontSize="large" />
+            : <ToggleOffTwoToneIcon fontSize="large" />}
         </ToggleButton>
       </div>
       <div className={`filter-type ${selected ? 'active' : ''}`}><p>Population</p></div>
