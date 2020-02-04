@@ -59,7 +59,7 @@ const App = () => {
       <SearchBar
         countryList={countries}
         addSelected={onSelect}
-        empty={removeSelection}
+        resetList={removeSelection}
       />
       <FilterBar
         handleFilter={filterCountries}

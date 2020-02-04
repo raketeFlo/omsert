@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 
-const SearchBar = ({ countryList, addSelected, empty }) => {
+const SearchBar = ({ countryList, addSelected, resetList }) => {
   const classes = useStyles();
   return (
     <div className="search-container">
@@ -25,20 +25,22 @@ const SearchBar = ({ countryList, addSelected, empty }) => {
         <Autocomplete
           id="size-small-standard"
           size="small"
+          disableOpenOnFocus
           autoHighlight
-          disableClearable
-          onChange={(e) => addSelected(e.target.textContent)}
+          clearOnEscape
+          onChange={(e) => {
+            addSelected(e.target.textContent);
+          }}
           options={countryList.map((country) => country.name)}
           renderInput={(params) => (
             <TextField
               {...params}
-              onChange={(e) => empty(e.target.value)}
+              onChange={(e) => resetList(e.target.value)}
               className={classes.root}
               label="Type country name..."
               margin="normal"
               variant="standard"
               fullWidth
-              type="search"
             />
           )}
         />
@@ -49,7 +51,7 @@ const SearchBar = ({ countryList, addSelected, empty }) => {
 
 SearchBar.propTypes = {
   addSelected: PropTypes.func.isRequired,
-  empty: PropTypes.func.isRequired,
+  resetList: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

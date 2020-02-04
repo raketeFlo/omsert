@@ -5,17 +5,18 @@ import { fitBounds } from 'google-map-react/utils';
 import GoogleMapReact from 'google-map-react';
 import Marker from '../../components/Marker/Marker';
 
-const Map = ({ country }) => {
-  const defaultPosition = {
-    center: {
-      lat: 48.36,
-      lng: 10.89,
-    },
-    zoom: 9,
-    bounds: null,
-  };
+const defaultPosition = {
+  center: {
+    lat: 48.36,
+    lng: 10.89,
+  },
+  zoom: 10,
+};
 
+const Map = ({ country }) => {
+  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
   const [position, setPosition] = useState(defaultPosition);
+
 
   const setCountry = async () => {
     if (country.length) {
@@ -41,9 +42,6 @@ const Map = ({ country }) => {
   useEffect(() => {
     setCountry();
   }, [country]);
-
-  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
-
 
   return (
     <div id="map" style={{ height: '50vh', width: '100%' }}>
