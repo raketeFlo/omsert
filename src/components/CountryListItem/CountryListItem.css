@@ -8,7 +8,7 @@
 }
 
 .info-pop {
-  color: 	#D3D3D3;
+  color: 	var(--second-color);
 }
 
 .info-pop,
@@ -27,5 +27,5 @@
   font-size: 12px;
   width: 90%;
   margin: 0 auto;
-  border-bottom: 0.5px solid #D3D3D3;
+  border-bottom: 0.5px solid var(--second-color);
 }
