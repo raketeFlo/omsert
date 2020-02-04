@@ -8,6 +8,10 @@ import {
   TwitterShareButton, TwitterIcon,
   WhatsappShareButton, WhatsappIcon,
 } from 'react-share';
+import LocationCityRoundedIcon from '@material-ui/icons/LocationCityRounded';
+import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
+import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
+import LocalAtmRoundedIcon from '@material-ui/icons/LocalAtmRounded';
 import Modal from '@material-ui/core/Modal';
 import { createEmail } from '../../utils/emailTemplate';
 import './CountryDetails.css';
@@ -82,20 +86,28 @@ const CountryDetails = ({
       >
         <div style={modalStyle} className={classes.paper}>
           <div className="info">
-            <p>Capital: </p>
-            {!details.capital ? 'N/A' : details.capital}
+            <LocationCityRoundedIcon />
+            <p>
+              {!details.capital ? 'N/A' : details.capital}
+            </p>
           </div>
           <div className="info">
-            <p>Continent: </p>
-            {!details.region ? 'N/A' : details.region}
+            <ExploreRoundedIcon />
+            <p>
+              {!details.region ? 'N/A' : details.region}
+            </p>
           </div>
           <div className="info">
-            <p>Timezones: </p>
-            {timezones}
+            <ScheduleRoundedIcon />
+            <p>
+              {timezones}
+            </p>
           </div>
           <div className="info">
-            <p>Currencies: </p>
-            {currencies}
+            <LocalAtmRoundedIcon />
+            <p>
+              {currencies}
+            </p>
           </div>
           <EmailShareButton
             subject={shareTitle}

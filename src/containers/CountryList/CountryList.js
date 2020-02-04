@@ -15,8 +15,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
     return (
       <Lazyload
         key={uuidv4()}
-        height={10}
-        offset={[-100, 100]}
+        height={50}
         width="100%"
         once
         overflow
