@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Geocode from 'react-geocode';
 import PropTypes from 'prop-types';
+import { fitBounds } from 'google-map-react/utils';
 import GoogleMapReact from 'google-map-react';
 import Marker from '../../components/Marker/Marker';
 
@@ -10,7 +11,8 @@ const Map = ({ country }) => {
       lat: 48.36,
       lng: 10.89,
     },
-    zoom: 11,
+    zoom: 9,
+    bounds: null,
   };
 
   const [position, setPosition] = useState(defaultPosition);
@@ -18,13 +20,17 @@ const Map = ({ country }) => {
   const setCountry = async () => {
     if (country.length) {
       const response = await Geocode.fromAddress(country[0].name);
-      const { lat, lng } = response.results[0].geometry.location;
+      const { northeast, southwest } = response.results[0].geometry.bounds;
+      const bounds = {
+        ne: northeast,
+        sw: southwest,
+      };
+      const width = document.getElementById('map').offsetWidth;
+      const height = document.getElementById('map').offsetHeight;
+      const { center, zoom } = fitBounds(bounds, { width, height });
       const newPosition = {
-        center: {
-          lat,
-          lng,
-        },
-        zoom: 5,
+        center,
+        zoom,
       };
       setPosition(newPosition);
     } else {
@@ -38,9 +44,9 @@ const Map = ({ country }) => {
 
   Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
 
+
   return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '50vh', width: '100%' }}>
+    <div id="map" style={{ height: '50vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
         defaultCenter={defaultPosition.center}
