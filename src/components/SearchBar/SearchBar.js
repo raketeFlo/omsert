@@ -23,7 +23,13 @@ const SearchBar = ({ countryList, handleSelection, input }) => {
           }}
           options={countryList.map((country) => country.name)}
           renderInput={(params) => (
-            <TextField {...params} label="Type country name..." margin="normal" fullWidth variant="standard" />
+            <TextField
+              {...params}
+              label="Type country name..."
+              margin="normal"
+              fullWidth
+              variant="standard"
+            />
           )}
         />
       </div>

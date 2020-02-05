@@ -6,7 +6,7 @@ import uuidv4 from 'uuid/v4';
 import CountryDetails from '../../components/CountryDetails/CountryDetails';
 import CountryListItem from '../../components/CountryListItem/CountryListItem';
 
-const CountryList = ({ countryList, addSelected, detailsCountry }) => {
+const CountryList = ({ countryList, renderSelected, detailsCountry }) => {
   const [flag, setFlag] = useState(false);
   const handleModal = () => {
     setFlag(!flag);
@@ -24,7 +24,7 @@ const CountryList = ({ countryList, addSelected, detailsCountry }) => {
         <CountryListItem
           key={uuidv4()}
           listItem={country}
-          selectCountry={addSelected}
+          selectCountry={renderSelected}
           handleOpen={handleModal}
         />
       </Lazyload>
@@ -44,7 +44,7 @@ const CountryList = ({ countryList, addSelected, detailsCountry }) => {
         flag={flag}
         handleOpen={handleModal}
         details={detailsCountry[0]}
-        selectCountry={addSelected}
+        selectCountry={renderSelected}
       />
     </div>
   );
@@ -65,7 +65,7 @@ CountryList.propTypes = {
     latlng: PropTypes.arrayOf(PropTypes.number),
     timezones: PropTypes.arrayOf(PropTypes.string),
   })).isRequired,
-  addSelected: PropTypes.func.isRequired,
+  renderSelected: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

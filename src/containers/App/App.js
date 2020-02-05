@@ -21,6 +21,7 @@ const App = () => {
       setSelectedCountry([selected]);
     } else {
       setInput('');
+      setModalCountry([]);
       setSelectedCountry([]);
     }
   };
@@ -67,7 +68,7 @@ const App = () => {
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
-        addSelected={changeLocation}
+        renderSelected={changeLocation}
         detailsCountry={modalCountry}
       />
       <GlobalMap
