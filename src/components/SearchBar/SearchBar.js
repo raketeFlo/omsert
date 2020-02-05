@@ -6,8 +6,6 @@ import { Autocomplete } from '@material-ui/lab';
 import './SearchBar.css';
 
 const SearchBar = ({ countryList, handleSelection, input }) => {
-
-  console.log(input);
   return (
     <div className="search-container">
       <div className="icon-container">
@@ -19,7 +17,6 @@ const SearchBar = ({ countryList, handleSelection, input }) => {
           size="small"
           disableOpenOnFocus
           autoHighlight
-          clearOnEscape
           value={input}
           onChange={(e, value) => {
             handleSelection(value);
@@ -58,14 +55,3 @@ SearchBar.defaultProps = {
 };
 
 export default SearchBar;
-
-
-/*
-<TextField
-  {...params}
-  label="Type country name..."
-  margin="normal"
-  variant="standard"
-  fullWidth
-/>
-*/

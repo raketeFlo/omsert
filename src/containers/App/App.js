@@ -25,7 +25,6 @@ const App = () => {
     }
   };
 
-  // being called when click on details
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
     setInput(userInput);
