@@ -15,18 +15,19 @@
   color: var(--main-color);
 }
 
+.active p {
+  font-weight: 600;
+}
+
 .filter-sort {
   display: flex;
   justify-content: center;
   color: var(--second-color);
 }
 
-.MuiToggleButton-root {
+.MuiToggleButton-root,
+.Mui-selected {
   color: var(--main-color) !important;
-  background-color: none !important;
+  background-color: transparent !important;
   border: none !important;
-}
-
-.MuiToggleButton-root, .Mui-selected{
-  background-color: none !important;
 }
