@@ -17,15 +17,14 @@ const App = () => {
     const selected = countries.find((country) => country.name === userInput);
     if (selected) {
       setSelectedCountry([selected]);
-      setModalCountry([selected]);
     } else {
-      setModalCountry([]);
       setSelectedCountry([]);
     }
   };
 
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
+    setSelectedCountry([selected]);
     setModalCountry([selected]);
   };
 
