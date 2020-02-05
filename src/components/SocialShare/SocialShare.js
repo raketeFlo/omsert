@@ -6,7 +6,7 @@ import {
   TwitterShareButton, TwitterIcon,
   WhatsappShareButton, WhatsappIcon,
 } from 'react-share';
-import { createEmail } from '../../utils/emailTemplate';
+import { createEmail, parseElements } from '../../utils/emailTemplate';
 
 import './SocialShare.css';
 
@@ -16,11 +16,8 @@ const SocialShare = ({ details }) => {
   } = details;
   const shareURL = 'http://www.localhost:3000';
   const shareTitle = `Information about ${details.name}:`;
-  const currenciesEmail = [];
-  const timeZonesEmail = [];
-
-  currencies.map((currency) => currenciesEmail.push(currency.code));
-  timezones.map((timezone) => timeZonesEmail.push(timezone));
+  const currenciesEmail = parseElements(currencies);
+  const timeZonesEmail = parseElements(timezones);
 
   const emailTempl = createEmail(
     name, population, region, capital, currenciesEmail, timeZonesEmail,

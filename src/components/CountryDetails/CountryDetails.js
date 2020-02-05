@@ -53,14 +53,10 @@ const CountryDetails = ({ details, handleOpen, flag }) => {
     timezones, currencies, capital, region,
   } = details;
 
-  const currenciesEmail = [];
-  const timeZonesEmail = [];
-  const allCurrencies = currencies.map((currency) => {
-    currenciesEmail.push(currency.code);
+  const parsedCurrencies = currencies.map((currency) => {
     return <div key={uuidv4()}>{currency.code}</div>;
   });
-  const allTimezones = timezones.map((timezone) => {
-    timeZonesEmail.push(timezone);
+  const parsedTimezones = timezones.map((timezone) => {
     return <div key={uuidv4()}>{timezone}</div>;
   });
 
@@ -83,16 +79,14 @@ const CountryDetails = ({ details, handleOpen, flag }) => {
           </div>
           <div className="info">
             <ScheduleRoundedIcon />
-            {allTimezones}
+            {parsedTimezones}
           </div>
           <div className="info">
             <LocalAtmRoundedIcon />
-            {allCurrencies}
+            {parsedCurrencies}
           </div>
           <SocialShare
             details={details}
-            currencies={currenciesEmail}
-            timezones={timeZonesEmail}
           />
         </div>
       </Modal>
