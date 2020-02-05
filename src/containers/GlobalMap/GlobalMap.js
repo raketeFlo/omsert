@@ -21,7 +21,9 @@ const Map = ({ country }) => {
   useEffect(() => {
     const setCountry = async () => {
       if (country.length) {
-        const response = await Geocode.fromAddress(country[0].name);
+        let displayCountry = country[0].name;
+        if (displayCountry === 'Georgia') displayCountry += ' Country';
+        const response = await Geocode.fromAddress(displayCountry);
         const { northeast, southwest } = response.results[0].geometry.viewport;
         const bounds = {
           ne: northeast,
