@@ -14,7 +14,6 @@ const SocialShare = ({ details }) => {
   const {
     name, population, region, capital, timezones, currencies,
   } = details;
-  const shareURL = 'http://www.localhost:3000';
   const shareTitle = `Information about ${details.name}:`;
   const currenciesEmail = parseElements(currencies);
   const timeZonesEmail = parseElements(timezones);
@@ -29,7 +28,8 @@ const SocialShare = ({ details }) => {
       <EmailShareButton
         subject={shareTitle}
         body={emailTempl}
-        url={shareURL}
+        separator=" "
+        url={process.env.REACT_APP_MAIL_URL}
       >
         <div>
           <EmailIcon
@@ -40,7 +40,7 @@ const SocialShare = ({ details }) => {
       </EmailShareButton>
       <FacebookShareButton
         quote={emailTempl}
-        url={shareURL}
+        url={process.env.REACT_APP_MAIL_URL}
         separator=" "
       >
         <div>
@@ -53,7 +53,7 @@ const SocialShare = ({ details }) => {
       <TwitterShareButton
         title={emailTempl}
         hashtags={['hello', 'world', `${details.name}`]}
-        url={shareURL}
+        url={process.env.REACT_APP_MAIL_URL}
       >
         <div>
           <TwitterIcon
@@ -63,7 +63,7 @@ const SocialShare = ({ details }) => {
         </div>
       </TwitterShareButton>
       <WhatsappShareButton
-        url={shareURL}
+        url={process.env.REACT_APP_MAIL_URL}
         title={emailTempl}
         separator=" "
       >
