@@ -1,14 +1,16 @@
 .filter-container {
   width: 100%;
   display: flex;
+  padding: 0 5px;
   margin-top: 10px;
   margin-bottom: 10px;
-  justify-content:center;
   align-items: center;
 }
 
 .filter-container div {
-  width: 30%;
+  display: flex;
+  justify-content: center;
+  width: 25%;
 }
 
 .active {
@@ -20,13 +22,12 @@
 }
 
 .filter-sort {
-  display: flex;
-  justify-content: center;
   color: var(--second-color);
 }
 
 .MuiToggleButton-root,
 .Mui-selected {
+  padding: 0px !important;
   color: var(--main-color) !important;
   background-color: transparent !important;
   border: none !important;

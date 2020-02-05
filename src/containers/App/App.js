@@ -12,13 +12,15 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
   const [modalCountry, setModalCountry] = useState([]);
+  const [input, setInput] = useState('');
 
   const handleSearchSelection = (userInput) => {
-    const selected = countries.find((country) => country.name === userInput);
-    if (selected) {
+    if (userInput) {
+      const selected = countries.find((country) => country.name === userInput);
+      setInput(userInput);
       setSelectedCountry([selected]);
-      setModalCountry([selected]);
     } else {
+      setInput('');
       setModalCountry([]);
       setSelectedCountry([]);
     }
@@ -26,6 +28,8 @@ const App = () => {
 
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
+    setInput(userInput);
+    setSelectedCountry([selected]);
     setModalCountry([selected]);
   };
 
@@ -57,14 +61,15 @@ const App = () => {
       <SearchBar
         countryList={countries}
         handleSelection={handleSearchSelection}
+        input={input}
       />
       <FilterBar
         handleFilter={filterCountries}
       />
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
-        addSelected={changeLocation}
-        selectedCountry={modalCountry}
+        renderSelected={changeLocation}
+        detailsCountry={modalCountry}
       />
       <GlobalMap
         country={modalCountry}

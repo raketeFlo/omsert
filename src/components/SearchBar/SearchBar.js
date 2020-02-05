@@ -5,7 +5,7 @@ import { Autocomplete } from '@material-ui/lab';
 
 import './SearchBar.css';
 
-const SearchBar = ({ countryList, handleSelection }) => {
+const SearchBar = ({ countryList, handleSelection, input }) => {
   return (
     <div className="search-container">
       <div className="icon-container">
@@ -17,9 +17,9 @@ const SearchBar = ({ countryList, handleSelection }) => {
           size="small"
           disableOpenOnFocus
           autoHighlight
-          clearOnEscape
-          onChange={(e) => {
-            handleSelection(e.target.textContent);
+          value={input}
+          onChange={(e, value) => {
+            handleSelection(value);
           }}
           options={countryList.map((country) => country.name)}
           renderInput={(params) => (
@@ -27,8 +27,8 @@ const SearchBar = ({ countryList, handleSelection }) => {
               {...params}
               label="Type country name..."
               margin="normal"
-              variant="standard"
               fullWidth
+              variant="standard"
             />
           )}
         />
@@ -38,6 +38,7 @@ const SearchBar = ({ countryList, handleSelection }) => {
 };
 
 SearchBar.propTypes = {
+  input: PropTypes.string,
   handleSelection: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
@@ -53,6 +54,10 @@ SearchBar.propTypes = {
     latlng: PropTypes.arrayOf(PropTypes.number),
     timezones: PropTypes.arrayOf(PropTypes.string),
   })).isRequired,
+};
+
+SearchBar.defaultProps = {
+  input: '',
 };
 
 export default SearchBar;
