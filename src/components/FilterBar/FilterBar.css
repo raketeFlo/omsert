@@ -1,0 +1,34 @@
+.filter-container {
+  width: 100%;
+  display: flex;
+  padding: 0 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.filter-container div {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+}
+
+.active {
+  color: var(--main-color);
+}
+
+.active p {
+  font-weight: 600;
+}
+
+.filter-sort {
+  color: var(--second-color);
+}
+
+.MuiToggleButton-root,
+.Mui-selected {
+  padding: 0px !important;
+  color: var(--main-color) !important;
+  background-color: transparent !important;
+  border: none !important;
+}

@@ -32,7 +32,9 @@
         }
       ],
       "import/no-unresolved": "off",
-      "import/extensions": "never"
+      "consistent-return": "off",
+      "react/jsx-props-no-spreading": "off",
+      "arrow-body-style": "off"
     },
     "settings": {
       "import/resolver": {

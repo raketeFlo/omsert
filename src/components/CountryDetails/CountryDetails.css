@@ -1,0 +1,12 @@
+.info {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.info div {
+  padding: 10px;
+}
