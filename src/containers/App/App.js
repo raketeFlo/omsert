@@ -12,12 +12,15 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
   const [modalCountry, setModalCountry] = useState([]);
+  const [input, setInput] = useState('');
 
   const handleSearchSelection = (userInput) => {
-    const selected = countries.find((country) => country.name === userInput);
-    if (selected) {
+    if (userInput) {
+      const selected = countries.find((country) => country.name === userInput);
+      setInput(userInput);
       setSelectedCountry([selected]);
     } else {
+      setInput('');
       setSelectedCountry([]);
     }
   };
@@ -25,6 +28,7 @@ const App = () => {
   // being called when click on details
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
+    setInput(userInput);
     setSelectedCountry([selected]);
     setModalCountry([selected]);
   };
@@ -52,12 +56,12 @@ const App = () => {
     fetchData();
   }, []);
 
-  console.log(selectedCountry);
   return (
     <div className="App-Container">
       <SearchBar
         countryList={countries}
         handleSelection={handleSearchSelection}
+        input={input}
       />
       <FilterBar
         handleFilter={filterCountries}
