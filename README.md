@@ -5,7 +5,7 @@ Omsert is a React application with information about the countries of the ​Ear
 
 ## How it works
 
-The app is using the `Rest Countries API` to get the information about each country. You can search for any country in the world and filter the list for it. If you want to get more information about a country, you have to select it. The Google Maps API will then render the country on the map and a modal will provide you additional information about it which you can then share via social share with your friends.
+The app is using the `Rest Countries API` to get the information about each country. You can search for any country in the world and filter the list for it. If you want to get more information about a country, you have to select it. The `Google Maps API` will then render the country on the map and a modal will provide you additional information about it which you can then share via social share with your friends.
 
 ## Live Demo
 To run the app on your mobile device please open the following link:
