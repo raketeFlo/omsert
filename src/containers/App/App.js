@@ -13,12 +13,13 @@ const App = () => {
   const [selectedCountry, setSelectedCountry] = useState([]);
   const [modalCountry, setModalCountry] = useState([]);
 
-  const onSelect = (userInput) => {
+  const handleSearchSelection = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
     if (selected) {
       setSelectedCountry([selected]);
       setModalCountry([selected]);
     } else {
+      setModalCountry([]);
       setSelectedCountry([]);
     }
   };
@@ -26,10 +27,6 @@ const App = () => {
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
     setModalCountry([selected]);
-  };
-
-  const removeSelection = (currentInput) => {
-    if (!currentInput) setSelectedCountry([]);
   };
 
   const filterCountries = (check) => {
@@ -59,8 +56,7 @@ const App = () => {
     <div className="App-Container">
       <SearchBar
         countryList={countries}
-        addSelected={onSelect}
-        resetList={removeSelection}
+        handleSelection={handleSearchSelection}
       />
       <FilterBar
         handleFilter={filterCountries}

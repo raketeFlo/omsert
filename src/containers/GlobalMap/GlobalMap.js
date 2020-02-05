@@ -38,6 +38,7 @@ const Map = ({ country }) => {
         setMarker({ center: { lat, lng } });
         setPosition(newPosition);
       } else {
+        setMarker(defaultPosition);
         setPosition(defaultPosition);
       }
     };
