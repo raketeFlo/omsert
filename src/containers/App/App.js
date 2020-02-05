@@ -35,8 +35,13 @@ const App = () => {
   const filterCountries = (check) => {
     const filter = check ? 'name' : 'population';
     const filtered = [...countries].sort((a, b) => {
-      if (a[filter] < b[filter]) return -1;
-      if (a[filter] > b[filter]) return 1;
+      if (filter === 'name') {
+        if (a[filter] < b[filter]) return -1;
+        if (a[filter] > b[filter]) return 1;
+        return 0;
+      }
+      if (a[filter] > b[filter]) return -1;
+      if (a[filter] < b[filter]) return 1;
       return 0;
     });
     setCountries(filtered);

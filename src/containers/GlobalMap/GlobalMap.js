@@ -14,9 +14,9 @@ const defaultPosition = {
 };
 
 const Map = ({ country }) => {
-  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
   const [position, setPosition] = useState(defaultPosition);
   const [marker, setMarker] = useState(defaultPosition);
+  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
 
   useEffect(() => {
     const setCountry = async () => {

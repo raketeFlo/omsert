@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-function getModalStyle() {
+const getModalStyle = () => {
   const top = 50;
   const left = 50;
 
@@ -42,7 +42,7 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
-}
+};
 
 
 const CountryDetails = ({ details, handleOpen, flag }) => {
