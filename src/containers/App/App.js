@@ -3,7 +3,7 @@ import CountryList from '../CountryList/CountryList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import GlobalMap from '../GlobalMap/GlobalMap';
-import { getCountries } from '../../services/ApiClient';
+import getCountries from '../../services/ApiClient';
 import './App.css';
 
 require('dotenv').config();
