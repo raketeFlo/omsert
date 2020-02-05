@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
 
 import './SearchBar.css';
 
-// TODO: change background color
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: '#ffff',
-  },
-});
-
-
-const SearchBar = ({ countryList, addSelected, resetList }) => {
-  const classes = useStyles();
+const SearchBar = ({ countryList, handleSelection }) => {
   return (
     <div className="search-container">
       <div className="icon-container">
@@ -29,14 +19,12 @@ const SearchBar = ({ countryList, addSelected, resetList }) => {
           autoHighlight
           clearOnEscape
           onChange={(e) => {
-            addSelected(e.target.textContent);
+            handleSelection(e.target.textContent);
           }}
           options={countryList.map((country) => country.name)}
           renderInput={(params) => (
             <TextField
               {...params}
-              onChange={(e) => resetList(e.target.value)}
-              className={classes.root}
               label="Type country name..."
               margin="normal"
               variant="standard"
@@ -50,8 +38,7 @@ const SearchBar = ({ countryList, addSelected, resetList }) => {
 };
 
 SearchBar.propTypes = {
-  addSelected: PropTypes.func.isRequired,
-  resetList: PropTypes.func.isRequired,
+  handleSelection: PropTypes.func.isRequired,
   countryList: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,

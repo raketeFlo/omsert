@@ -10,23 +10,26 @@ const FilterBar = ({ handleFilter }) => {
   const [selected, setSelected] = useState(false);
   return (
     <div className="filter-container">
-      <div>Name</div>
-      <ToggleButton
-        disableRipple
-        disableFocusRipple
-        value="check"
-        className="MuiToggleButton-root"
-        selected={selected}
-        onChange={() => {
-          handleFilter(selected);
-          setSelected(!selected);
-        }}
-      >
-        {selected
-          ? <ToggleOnTwoToneIcon />
-          : <ToggleOffTwoToneIcon />}
-      </ToggleButton>
-      <div>Population</div>
+      <div className="filter-sort"><p>sort by:</p></div>
+      <div className={`filter-type ${selected ? '' : 'active'}`}><p>Name</p></div>
+      <div className="filter-button">
+        <ToggleButton
+          disableRipple
+          disableFocusRipple
+          value="check"
+          className="MuiToggleButton-root"
+          selected={selected}
+          onChange={() => {
+            handleFilter(selected);
+            setSelected(!selected);
+          }}
+        >
+          {selected
+            ? <ToggleOnTwoToneIcon fontSize="large" />
+            : <ToggleOffTwoToneIcon fontSize="large" />}
+        </ToggleButton>
+      </div>
+      <div className={`filter-type ${selected ? 'active' : ''}`}><p>Population</p></div>
     </div>
   );
 };

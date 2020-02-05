@@ -1,9 +1,12 @@
 .info {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
   width: 100%;
-  padding: 2px;
+  padding: 10px;
 }
 
-.info p {
-  font-weight: 900;
-  text-transform: uppercase;
+.info div {
+  padding: 10px;
 }

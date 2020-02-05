@@ -14,15 +14,15 @@ const defaultPosition = {
 };
 
 const Map = ({ country }) => {
-  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
   const [position, setPosition] = useState(defaultPosition);
-
+  const [marker, setMarker] = useState(defaultPosition);
+  Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
 
   useEffect(() => {
     const setCountry = async () => {
       if (country.length) {
         const response = await Geocode.fromAddress(country[0].name);
-        const { northeast, southwest } = response.results[0].geometry.bounds;
+        const { northeast, southwest } = response.results[0].geometry.viewport;
         const bounds = {
           ne: northeast,
           sw: southwest,
@@ -30,12 +30,15 @@ const Map = ({ country }) => {
         const width = document.getElementById('map').offsetWidth;
         const height = document.getElementById('map').offsetHeight;
         const { center, zoom } = fitBounds(bounds, { width, height });
+        const { lat, lng } = response.results[0].geometry.location;
         const newPosition = {
           center,
           zoom,
         };
+        setMarker({ center: { lat, lng } });
         setPosition(newPosition);
       } else {
+        setMarker(defaultPosition);
         setPosition(defaultPosition);
       }
     };
@@ -52,8 +55,8 @@ const Map = ({ country }) => {
         zoom={position.zoom}
       >
         <Marker
-          lat={position.center.lat}
-          lng={position.center.lng}
+          lat={marker.center.lat}
+          lng={marker.center.lng}
         />
       </GoogleMapReact>
     </div>

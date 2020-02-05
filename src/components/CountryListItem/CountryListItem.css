@@ -9,19 +9,26 @@
 
 .info-pop,
 .info-flag,
-.info-name,
 .info-button {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 25%;
+}
+
+.info-name {
+  display: flex;
+  font-weight: 600;
+  justify-content: flex-start;
+  width: 25%;
 }
 
 .item-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
-  width: 90%;
-  margin: 0 auto;
+  font-size: 13px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-bottom: 0.5px solid var(--second-color);
 }

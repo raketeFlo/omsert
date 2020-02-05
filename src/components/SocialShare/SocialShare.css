@@ -1,0 +1,15 @@
+.social-container {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.social-container div {
+  margin-right: 10px;
+  outline: none;
+}
+
+.social-container button {
+  outline: none;
+}

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import uuidv4 from 'uuid/v4';
-import {
-  EmailShareButton, EmailIcon,
-  FacebookShareButton, FacebookIcon,
-  TwitterShareButton, TwitterIcon,
-  WhatsappShareButton, WhatsappIcon,
-} from 'react-share';
 import Modal from '@material-ui/core/Modal';
-import { createEmail } from '../../utils/emailTemplate';
+import LocationCityRoundedIcon from '@material-ui/icons/LocationCityRounded';
+import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
+import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
+import LocalAtmRoundedIcon from '@material-ui/icons/LocalAtmRounded';
+import SocialShare from '../SocialShare/SocialShare';
+
 import './CountryDetails.css';
 
 const useStyles = makeStyles({
@@ -17,7 +16,8 @@ const useStyles = makeStyles({
     position: 'absolute',
     width: '90%',
     backgroundColor: 'white',
-    border: '2px solid #000',
+    border: '3px solid #651FFF',
+    outline: 'none',
     padding: 20,
   },
   titel: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-function getModalStyle() {
+const getModalStyle = () => {
   const top = 50;
   const left = 50;
 
@@ -43,34 +43,22 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
-}
+};
 
 
-const CountryDetails = ({
-  details, handleOpen, flag,
-}) => {
-  const {
-    name, population, region, capital,
-  } = details;
-  const classes = useStyles();
-  const currenciesEmail = [];
-  const timeZonesEmail = [];
-  const shareURL = 'http://www.localhost:3000';
-  const shareTitle = `Information about ${details.name}:`;
+const CountryDetails = ({ details, handleOpen, flag }) => {
   const [modalStyle] = useState(getModalStyle);
-  const currencies = details.currencies.map((currency) => {
-    currenciesEmail.push(currency.code);
+  const classes = useStyles();
+  const {
+    timezones, currencies, capital, region,
+  } = details;
+
+  const parsedCurrencies = currencies.map((currency) => {
     return <div key={uuidv4()}>{currency.code}</div>;
   });
-  const timezones = details.timezones.map((timezone) => {
-    timeZonesEmail.push(timezone);
+  const parsedTimezones = timezones.map((timezone) => {
     return <div key={uuidv4()}>{timezone}</div>;
   });
-
-
-  const emailTempl = createEmail(
-    name, population, region, capital, currenciesEmail, timeZonesEmail,
-  );
 
   return (
     <div>
@@ -82,49 +70,24 @@ const CountryDetails = ({
       >
         <div style={modalStyle} className={classes.paper}>
           <div className="info">
-            <p>Capital: </p>
-            {!details.capital ? 'N/A' : details.capital}
+            <LocationCityRoundedIcon />
+            <div>{!capital ? 'N/A' : capital}</div>
           </div>
           <div className="info">
-            <p>Continent: </p>
-            {!details.region ? 'N/A' : details.region}
+            <ExploreRoundedIcon />
+            <div>{!region ? 'N/A' : region}</div>
           </div>
           <div className="info">
-            <p>Timezones: </p>
-            {timezones}
+            <ScheduleRoundedIcon />
+            {parsedTimezones}
           </div>
           <div className="info">
-            <p>Currencies: </p>
-            {currencies}
+            <LocalAtmRoundedIcon />
+            {parsedCurrencies}
           </div>
-          <EmailShareButton
-            subject={shareTitle}
-            body={emailTempl}
-            url={shareURL}
-          >
-            <EmailIcon />
-          </EmailShareButton>
-          <FacebookShareButton
-            quote={emailTempl}
-            url={shareURL}
-            separator=" "
-          >
-            <FacebookIcon />
-          </FacebookShareButton>
-          <TwitterShareButton
-            title={emailTempl}
-            hashtags={['hello', 'world', `${details.name}`]}
-            url={shareURL}
-          >
-            <TwitterIcon />
-          </TwitterShareButton>
-          <WhatsappShareButton
-            url={shareURL}
-            title={emailTempl}
-            separator=" "
-          >
-            <WhatsappIcon />
-          </WhatsappShareButton>
+          <SocialShare
+            details={details}
+          />
         </div>
       </Modal>
     </div>

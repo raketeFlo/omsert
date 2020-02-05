@@ -3,16 +3,31 @@
   display: flex;
   margin-top: 10px;
   margin-bottom: 10px;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
 }
 
-.MuiToggleButton-root {
-  color: var(--main-color) !important;
-  background-color: none !important;
-  border: none !important;
+.filter-container div {
+  width: 30%;
 }
 
-.MuiToggleButton-root, .Mui-selected{
-  background-color: none !important;
+.active {
+  color: var(--main-color);
+}
+
+.active p {
+  font-weight: 600;
+}
+
+.filter-sort {
+  display: flex;
+  justify-content: center;
+  color: var(--second-color);
+}
+
+.MuiToggleButton-root,
+.Mui-selected {
+  color: var(--main-color) !important;
+  background-color: transparent !important;
+  border: none !important;
 }
