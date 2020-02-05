@@ -22,6 +22,7 @@ const App = () => {
     }
   };
 
+  // being called when click on details
   const changeLocation = (userInput) => {
     const selected = countries.find((country) => country.name === userInput);
     setSelectedCountry([selected]);
@@ -51,6 +52,7 @@ const App = () => {
     fetchData();
   }, []);
 
+  console.log(selectedCountry);
   return (
     <div className="App-Container">
       <SearchBar
@@ -63,7 +65,7 @@ const App = () => {
       <CountryList
         countryList={selectedCountry.length ? selectedCountry : countries}
         addSelected={changeLocation}
-        selectedCountry={modalCountry}
+        detailsCountry={modalCountry}
       />
       <GlobalMap
         country={modalCountry}

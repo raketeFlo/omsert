@@ -6,7 +6,7 @@ import uuidv4 from 'uuid/v4';
 import CountryDetails from '../../components/CountryDetails/CountryDetails';
 import CountryListItem from '../../components/CountryListItem/CountryListItem';
 
-const CountryList = ({ countryList, addSelected, selectedCountry }) => {
+const CountryList = ({ countryList, addSelected, detailsCountry }) => {
   const [flag, setFlag] = useState(false);
   const handleModal = () => {
     setFlag(!flag);
@@ -43,7 +43,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
       <CountryDetails
         flag={flag}
         handleOpen={handleModal}
-        details={selectedCountry[0]}
+        details={detailsCountry[0]}
         selectCountry={addSelected}
       />
     </div>
@@ -51,7 +51,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
 };
 
 CountryList.propTypes = {
-  selectedCountry: PropTypes.arrayOf(PropTypes.shape({
+  detailsCountry: PropTypes.arrayOf(PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.shape({
       code: PropTypes.string,
       name: PropTypes.string,
