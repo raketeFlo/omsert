@@ -11,6 +11,7 @@ const CountryList = ({ countryList, addSelected, selectedCountry }) => {
   const handleModal = () => {
     setFlag(!flag);
   };
+
   const JSXList = countryList.map((country) => {
     return (
       <Lazyload
