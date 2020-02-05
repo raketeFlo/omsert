@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     position: 'absolute',
     width: '90%',
     backgroundColor: 'white',
-    border: '2px solid #000',
+    border: '3px solid #651FFF',
+    outline: 'none',
     padding: 20,
   },
   titel: {
